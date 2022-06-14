@@ -1,5 +1,7 @@
 package org.example.dao;
 
+import org.example.entity.Division;
+import org.example.entity.DivisionDetail;
 import org.example.entity.Driver;
 import org.example.utils.HibernateUtil;
 import org.hibernate.HibernateException;
@@ -9,16 +11,16 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class DriverDAOImpl implements DriverDAO{
+public class DivisionDetailDAOImpl implements DivisionDetailDAO {
     @Override
-    public List<Driver> getAll() {
+    public List<DivisionDetail> getAll() {
         Session session= HibernateUtil.getSessionFactory().openSession();
         Transaction tx=null;
         try {
             tx=session.beginTransaction();
-            List<Driver> drivers=session.createQuery("from Driver ").list();
+            List<DivisionDetail> divisionDetails=session.createQuery("from DivisionDetail ").list();
             session.getTransaction().commit();
-            return drivers;
+            return divisionDetails;
         }catch (HibernateException e){
             if(tx==null)
                 tx.rollback();
@@ -30,16 +32,16 @@ public class DriverDAOImpl implements DriverDAO{
     }
 
     @Override
-    public Driver getOneById(int id) {
+    public List<DivisionDetail> getAllByDivision(Division d) {
         Session session= HibernateUtil.getSessionFactory().openSession();
         Transaction tx=null;
         try {
             tx=session.beginTransaction();
-            Query<Driver> query=session.createQuery("from Driver where id=:d_id");
-            query.setParameter("d_id",id);
-            Driver driver=query.getSingleResult();
+            Query<DivisionDetail> query= session.createQuery("from DivisionDetail where division=:d_id");
+            query.setParameter("d_id",d);
+            List<DivisionDetail> divisionDetails=query.getResultList();
             session.getTransaction().commit();
-            return driver;
+            return divisionDetails;
         }catch (HibernateException e){
             if(tx==null)
                 tx.rollback();
@@ -51,12 +53,32 @@ public class DriverDAOImpl implements DriverDAO{
     }
 
     @Override
-    public boolean addNew(Driver driver) {
+    public boolean addNew(DivisionDetail divisionDetail) {
         Session session= HibernateUtil.getSessionFactory().openSession();
         Transaction tx=null;
         try {
             tx=session.beginTransaction();
-            session.save(driver);
+            session.save(divisionDetail);
+            session.getTransaction().commit();
+            return true;
+        }catch (HibernateException e){
+            if(tx==null)
+                tx.rollback();
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return false;
+
+    }
+
+    @Override
+    public boolean update(DivisionDetail divisionDetail) {
+        Session session= HibernateUtil.getSessionFactory().openSession();
+        Transaction tx=null;
+        try {
+            tx=session.beginTransaction();
+            session.update(divisionDetail);
             session.getTransaction().commit();
             return true;
         }catch (HibernateException e){
@@ -70,12 +92,12 @@ public class DriverDAOImpl implements DriverDAO{
     }
 
     @Override
-    public boolean update(Driver driver) {
+    public boolean delete(DivisionDetail divisionDetail) {
         Session session= HibernateUtil.getSessionFactory().openSession();
         Transaction tx=null;
         try {
             tx=session.beginTransaction();
-            session.update(driver);
+            session.delete(divisionDetail);
             session.getTransaction().commit();
             return true;
         }catch (HibernateException e){
@@ -85,26 +107,6 @@ public class DriverDAOImpl implements DriverDAO{
         }finally {
             session.close();
         }
-        return false;
-    }
-
-    @Override
-    public boolean delete(Driver driver) {
-        Session session= HibernateUtil.getSessionFactory().openSession();
-        Transaction tx=null;
-        try {
-            tx=session.beginTransaction();
-            session.delete(driver);
-            session.getTransaction().commit();
-            return true;
-        }catch (HibernateException e){
-            if(tx==null)
-                tx.rollback();
-            e.printStackTrace();
-        }finally {
-            session.close();
-        }
-        Driver dsriver=new Driver();
         return false;
     }
 }

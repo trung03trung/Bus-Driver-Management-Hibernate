@@ -2,6 +2,8 @@ package org.example.main;
 
 import org.example.dao.DriverDAO;
 import org.example.dao.DriverDAOImpl;
+import org.example.entity.Division;
+import org.example.service.DivisionService;
 import org.example.service.DriverService;
 import org.example.service.RouteService;
 
@@ -10,7 +12,7 @@ import java.util.Scanner;
 public class Main {
     public static DriverService driverService=new DriverService();
     public static RouteService routeService=new RouteService();
-
+    public static DivisionService divisionService=new DivisionService();
     public static void main(String[] args) {
         while (true) {
             System.out.println("-------Phần mềm quản lý điểm sinh viên-------");
@@ -40,6 +42,9 @@ public class Main {
                 case 4:
                     routeService.showAllRoute();
                     break;
+                case 5:
+
+                    divisionService.showAllDivision();
                 default:
                     System.out.println("Chỉ chọn từ 0 đến 8!!");
                     break;

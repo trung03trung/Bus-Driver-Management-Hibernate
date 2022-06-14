@@ -11,9 +11,10 @@
         <property name="hibernate.connection.password">123456789</property>
         <property name="show_sql">true</property>
         <property name="hibernate.dialect">org.hibernate.dialect.Oracle12cDialect</property>
-
         <mapping class="org.example.entity.Driver"/>
         <mapping class="org.example.entity.Route"/>
+        <mapping class="org.example.entity.Division"/>
+        <mapping class="org.example.entity.DivisionDetail"/>
 
 
     </session-factory>
