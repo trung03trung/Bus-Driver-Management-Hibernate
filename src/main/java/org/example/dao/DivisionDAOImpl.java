@@ -49,14 +49,14 @@ public class DivisionDAOImpl implements DivisionDAO{
     }
 
     @Override
-    public boolean update(Division division) {
+    public List<Division> orderByNameDriver() {
         Session session= HibernateUtil.getSessionFactory().openSession();
         Transaction tx=null;
         try {
             tx=session.beginTransaction();
-            session.update(division);
+            List<Division> division=session.createQuery("from Division d ORDER BY d.driver.name").list();
             session.getTransaction().commit();
-            return true;
+            return division;
         }catch (HibernateException e){
             if(tx==null)
                 tx.rollback();
@@ -64,25 +64,6 @@ public class DivisionDAOImpl implements DivisionDAO{
         }finally {
             session.close();
         }
-        return false;
-    }
-
-    @Override
-    public boolean delete(Division division) {
-        Session session= HibernateUtil.getSessionFactory().openSession();
-        Transaction tx=null;
-        try {
-            tx=session.beginTransaction();
-            session.delete(division);
-            session.getTransaction().commit();
-            return true;
-        }catch (HibernateException e){
-            if(tx==null)
-                tx.rollback();
-            e.printStackTrace();
-        }finally {
-            session.close();
-        }
-        return false;
+        return null;
     }
 }

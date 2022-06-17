@@ -31,26 +31,7 @@ public class DivisionDetailDAOImpl implements DivisionDetailDAO {
         return null;
     }
 
-    @Override
-    public List<DivisionDetail> getAllByDivision(Division d) {
-        Session session= HibernateUtil.getSessionFactory().openSession();
-        Transaction tx=null;
-        try {
-            tx=session.beginTransaction();
-            Query<DivisionDetail> query= session.createQuery("from DivisionDetail where division=:d_id");
-            query.setParameter("d_id",d);
-            List<DivisionDetail> divisionDetails=query.getResultList();
-            session.getTransaction().commit();
-            return divisionDetails;
-        }catch (HibernateException e){
-            if(tx==null)
-                tx.rollback();
-            e.printStackTrace();
-        }finally {
-            session.close();
-        }
-        return null;
-    }
+
 
     @Override
     public boolean addNew(DivisionDetail divisionDetail) {
@@ -72,41 +53,5 @@ public class DivisionDetailDAOImpl implements DivisionDetailDAO {
 
     }
 
-    @Override
-    public boolean update(DivisionDetail divisionDetail) {
-        Session session= HibernateUtil.getSessionFactory().openSession();
-        Transaction tx=null;
-        try {
-            tx=session.beginTransaction();
-            session.update(divisionDetail);
-            session.getTransaction().commit();
-            return true;
-        }catch (HibernateException e){
-            if(tx==null)
-                tx.rollback();
-            e.printStackTrace();
-        }finally {
-            session.close();
-        }
-        return false;
-    }
 
-    @Override
-    public boolean delete(DivisionDetail divisionDetail) {
-        Session session= HibernateUtil.getSessionFactory().openSession();
-        Transaction tx=null;
-        try {
-            tx=session.beginTransaction();
-            session.delete(divisionDetail);
-            session.getTransaction().commit();
-            return true;
-        }catch (HibernateException e){
-            if(tx==null)
-                tx.rollback();
-            e.printStackTrace();
-        }finally {
-            session.close();
-        }
-        return false;
-    }
 }

@@ -93,7 +93,20 @@ public class DivisionService {
     }
     public void showAllDivision(){
         List<Division> divisions=divisionDAO.getAll();
-        for(Division i:divisions)
-            System.out.println(i);
+        for(Division i:divisions) {
+            System.out.println("Lái xe "+ i.getDriver().getName()+"có DS các tuyến là:");
+            for(DivisionDetail j:i.getDivisionDetails())
+                System.out.println(j);
+
+        }
+    }
+    public void sortByNameDriver(){
+        List<Division> divisions=divisionDAO.orderByNameDriver();
+        for(Division i:divisions) {
+            System.out.println("Lái xe "+ i.getDriver().getName()+" có DS các tuyến là:");
+            for(DivisionDetail j:i.getDivisionDetails())
+                System.out.println(j);
+
+        }
     }
 }

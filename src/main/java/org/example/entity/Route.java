@@ -10,9 +10,9 @@ import javax.persistence.*;
 @Table(name = "route",catalog = "BusDriverManagement")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Route {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",nullable = false)
     private int id;
 
@@ -22,8 +22,5 @@ public class Route {
     @Column(name="stoppoint")
     private int stopPoint;
 
-    public Route(int distance, int stopPoint) {
-        this.distance = distance;
-        this.stopPoint = stopPoint;
-    }
+
 }

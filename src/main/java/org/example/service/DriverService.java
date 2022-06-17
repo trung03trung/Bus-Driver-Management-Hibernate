@@ -54,7 +54,8 @@ public class DriverService {
                 break;
             case 6:level=Character.toString(b[6]);
         }
-        boolean add= driverDAO.addNew(new Driver(name,address,phoneNum,level));
+        int id=10000+driverDAO.getAll().size();
+        boolean add= driverDAO.addNew(new Driver(id,name,address,phoneNum,level));
         if(add)
             System.out.println("Thêm mới thành công!");
         else{

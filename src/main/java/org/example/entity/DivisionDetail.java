@@ -37,9 +37,7 @@ public class DivisionDetail {
     @Override
     public String toString() {
         return "DivisionDetail{" +
-                "id=" + id +
-                ", division=" + division +
-                ", route=" + route +
+                "route=" + route +
                 ", numTurn=" + numTurn +
                 '}';
     }

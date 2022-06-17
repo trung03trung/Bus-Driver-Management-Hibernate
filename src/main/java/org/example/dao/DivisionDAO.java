@@ -11,7 +11,6 @@ public interface DivisionDAO {
 
     boolean addNew(Division division);
 
-    boolean update(Division division);
+    List<Division> orderByNameDriver();
 
-    boolean delete(Division division);
 }

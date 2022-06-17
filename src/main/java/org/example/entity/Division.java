@@ -21,7 +21,7 @@ public class Division {
     @ManyToOne()
     @JoinColumn(name = "driver_id",nullable = false)
     private Driver driver;
-    @OneToMany(mappedBy = "division",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "division",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @ToString.Exclude
     private List<DivisionDetail> divisionDetails;
 
@@ -33,8 +33,6 @@ public class Division {
     @Override
     public String toString() {
         return "Division{" +
-                "id=" + id +
-                ", divisionDetails=" + divisionDetails +
-                '}';
+                "id=" + id + "driver="+driver;
     }
 }

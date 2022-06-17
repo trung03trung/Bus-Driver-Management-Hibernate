@@ -7,11 +7,8 @@ import java.util.List;
 
 public interface DivisionDetailDAO {
     List<DivisionDetail> getAll();
-    List<DivisionDetail> getAllByDivision(Division d);
+
 
     boolean addNew(DivisionDetail divisionDetail);
 
-    boolean update(DivisionDetail divisionDetail);
-
-    boolean delete(DivisionDetail divisionDetail);
 }

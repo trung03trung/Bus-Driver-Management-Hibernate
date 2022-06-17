@@ -43,8 +43,12 @@ public class Main {
                     routeService.showAllRoute();
                     break;
                 case 5:
-
+                    divisionService.addNewDivision();
                     divisionService.showAllDivision();
+                    break;
+                case 6:
+                    divisionService.sortByNameDriver();
+                    break;
                 default:
                     System.out.println("Chỉ chọn từ 0 đến 8!!");
                     break;

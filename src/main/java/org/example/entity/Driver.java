@@ -11,10 +11,10 @@ import javax.persistence.*;
 @Table(name = "driver",catalog ="BusDriverManagement")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Driver {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",nullable = false)
     private int id;
 
@@ -30,11 +30,5 @@ public class Driver {
     @Column(name = "levels")
     private String level;
 
-    public Driver(String name, String address, String phoneNum, String level) {
-        this.name = name;
-        this.address = address;
-        this.phoneNum = phoneNum;
-        this.level = level;
-    }
 
 }

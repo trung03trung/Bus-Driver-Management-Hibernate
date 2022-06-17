@@ -37,7 +37,8 @@ public class RouteService {
             }
 
         }while (true);
-       boolean add= routeDAO.addNew(new Route(distance,stopPoint));
+        int id=routeDAO.getAll().size();
+       boolean add= routeDAO.addNew(new Route(id,distance,stopPoint));
         if(add)
             System.out.println("Thêm mới thành công!");
         else{
